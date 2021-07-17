@@ -61,3 +61,7 @@ WHY YOU SHOULD CARE
 
 ### Non-Functional
 - Testing 
+
+# Domain model
+
+[Domain Modeling](./spacepalace.jpg)
