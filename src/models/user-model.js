@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
-const jwt = requrie("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const Float = require("mongoose-float").loadType(mongoose);
 
 require("dotenv").config();
