@@ -54,4 +54,5 @@ productRouter.post("/products/:id", getOne);
 productRouter.post("/product/create", createProduct);
 productRouter.post("/products/dummydata", insertDummyData);
 
+
 module.exports = productRouter;
