@@ -39,9 +39,18 @@ const insertDummyData = async (req, res, next) => {
   }
 };
 
+const getOne = async (req, res, next) => {
+  try {
+    let oneProduct = await ProductModel.find({ id: req.params.id });
+    res.status(200).json(oneProduct);
+  } catch (e) {
+    next(e.message);
+  }
+};
 //ROUTES
 
 productRouter.get("/products", getAllProducts);
+productRouter.post("/products/:id", getOne);
 productRouter.post("/product/create", createProduct);
 productRouter.post("/products/dummydata", insertDummyData);
 
