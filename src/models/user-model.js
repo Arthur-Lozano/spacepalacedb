@@ -43,10 +43,10 @@ const UserSchema = new mongoose.Schema(
 );
 
 UserSchema.virtual("confirmPassword")
-  .get(() => this._confirmPAssword)
-  .set((value) => (this._confirmPAssword = value));
+  .get(() => this._confirmPassword)
+  .set((value) => (this._confirmPassword = value));
 
-UserSchema.virtual("token").get(() => {
+UserSchema.virtual("token").get(function () {
   let tokenObject = {
     firstName: this.firstName,
     lastName: this.lastName,
@@ -55,15 +55,22 @@ UserSchema.virtual("token").get(() => {
   return jwt.sign(tokenObject, process.env.SECRET);
 });
 
-UserSchema.pre("save", async () => {
+UserSchema.pre("validate", function (next) {
+  if (this.password !== this.confirmPassword) {
+    this.invalidate("confirmPassword", "Password must match confirm password");
+  }
+  next();
+});
+
+UserSchema.pre("save", async function () {
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 10);
   }
 });
 
 // BASIC AUTH
-UserSchema.statics.authenticateBasic = async (email, password) => {
-  const user = await this.findOne({ email });
+UserSchema.statics.authenticateBasic = async function (email, password) {
+  const user = await this.findOne({ email: email });
   const valid = await bcrypt.compare(password, user.password);
 
   if (valid) {
@@ -74,7 +81,7 @@ UserSchema.statics.authenticateBasic = async (email, password) => {
 };
 
 //Bearer Auth
-UserSchema.statics.authenticateWithToken = async (token) => {
+UserSchema.statics.authenticateWithToken = async function (token) {
   try {
     const parsedToken = jwt.verify(token, process.env.SECRET);
     const user = this.findOne({ email: parsedToken.email });

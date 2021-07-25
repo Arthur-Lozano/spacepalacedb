@@ -10,8 +10,11 @@ const bearerAuth = require("../middleware/bearer");
 
 authRouter.post("/register", async (req, res, next) => {
   try {
+    console.log(req.body);
+
     let user = new User(req.body);
     const userRecord = await user.save();
+    console.log(userRecord, "This is the record");
 
     const output = {
       user: userRecord,
