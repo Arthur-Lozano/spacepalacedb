@@ -29,6 +29,7 @@ const createProduct = async (req, res, next) => {
     next(e.message);
   }
 };
+
 const insertDummyData = async (req, res, next) => {
   try {
     let products = await ProductModel.insertMany(req.body);
