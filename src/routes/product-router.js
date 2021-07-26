@@ -41,7 +41,7 @@ const insertDummyData = async (req, res, next) => {
 
 const getOne = async (req, res, next) => {
   try {
-    let oneProduct = await ProductModel.find({ id: req.params.id });
+    let oneProduct = await ProductModel.find({ _id: req.params.id });
     res.status(200).json(oneProduct);
   } catch (e) {
     next(e.message);
