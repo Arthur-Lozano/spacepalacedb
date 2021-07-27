@@ -4,10 +4,7 @@ const transporter = require('../config/config');
 const dotenv = require('dotenv');
 dotenv.config();
 const emailRouter = express.Router();
-
-// const buildPath = path.join(__dirname, '..', 'build');
 emailRouter.use(express.json());
-// emailRouter.use(express.static());
 
 emailRouter.post('/send', (req, res) => {
   const mailOptions = {
