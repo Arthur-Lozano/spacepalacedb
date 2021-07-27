@@ -8,6 +8,7 @@ const errorHandler = require("./error-handlers/500");
 
 const authRoutes = require("./routes/user-routes");
 const productRoutes = require("./routes/product-router");
+const emailRouter = require("./routes/email-route");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 //Routes
 app.use(authRoutes);
 app.use(productRoutes);
+app.use(emailRouter);
 
 app.use(notFound);
 app.use(errorHandler);
