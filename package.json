@@ -28,9 +28,8 @@
     "jest": "^27.0.6",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.13.3",
-    "mongoose-float": "^1.0.4"
+    "mongoose-float": "^1.0.4",
+    "nodemailer": "^6.6.3"
   },
-  "devDependencies": {
-    "nodemailer": "^6.4.3"
-  }
+  "devDependencies": {}
 }
