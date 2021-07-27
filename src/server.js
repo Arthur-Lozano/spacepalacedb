@@ -8,7 +8,8 @@ const errorHandler = require("./error-handlers/500");
 
 const authRoutes = require("./routes/user-routes");
 const productRoutes = require("./routes/product-router");
-const emailRouter = require("./routes/email-route");
+const emailRouter = require("./routes/email-route.js");
+
 
 const app = express();
 
