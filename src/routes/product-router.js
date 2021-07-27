@@ -47,12 +47,32 @@ const getOne = async (req, res, next) => {
     next(e.message);
   }
 };
+
+const payment = async (req, res, next) => {
+  try {
+    let oneProduct = await ProductModel.find({ _id: req.params.id });
+    res.status(200).json(oneProduct);
+  } catch (e) {
+    next(e.message);
+  }
+};
+
+const cart = async (req, res, next) => {
+  try {
+    let oneProduct = await ProductModel.find({ _id: req.params.id });
+    res.status(200).json(oneProduct);
+  } catch (e) {
+    next(e.message);
+  }
+};
+
+
 //ROUTES
 
 productRouter.get("/products", getAllProducts);
 productRouter.post("/products/:id", getOne);
 productRouter.post("/product/create", createProduct);
 productRouter.post("/products/dummydata", insertDummyData);
-
-
+productRouter.post("/payment", payment);
+productRouter.post("/cart", cart);
 module.exports = productRouter;
