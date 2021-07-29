@@ -39,6 +39,18 @@ authRouter.post("/login", basicAuth, (req, res, next) => {
   }
 });
 
+authRouter.put("/order", async (req, res, next) => {
+  try {
+    console.log(req.body, "request body inside route");
+    const user = await User.findOne({ email: req.body.user });
+    user.orders.push(req.body.order);
+    user.save();
+    res.status(200).json(user.orders);
+  } catch (e) {
+    next(e.message);
+  }
+});
+
 authRouter.get("/user/:id", bearerAuth, async (req, res, next) => {
   try {
     const user = await User.findOne({ _id: req.params.id });

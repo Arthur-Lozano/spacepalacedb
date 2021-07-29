@@ -9,9 +9,8 @@ const { ProductSchema } = require("./products-model");
 
 const OrderSchema = new mongoose.Schema(
   {
-    products: [ProductSchema],
-    totalPrice: Float,
-    quantity: Number,
+    itemList: [ProductSchema],
+    subtotal: Float,
   },
   { timestamps: true }
 );
@@ -55,12 +54,12 @@ UserSchema.virtual("token").get(function () {
   return jwt.sign(tokenObject, process.env.SECRET);
 });
 
-UserSchema.pre("validate", function (next) {
-  if (this.password !== this.confirmPassword) {
-    this.invalidate("confirmPassword", "Password must match confirm password");
-  }
-  next();
-});
+// UserSchema.pre("validate", function (next) {
+//   if (this.password !== this.confirmPassword) {
+//     this.invalidate("confirmPassword", "Password must match confirm password");
+//   }
+//   next();
+// });
 
 UserSchema.pre("save", async function () {
   if (this.isModified("password")) {
