@@ -10,6 +10,7 @@ const ProductSchema = new mongoose.Schema({
   category: [String],
   itemWeight: Number,
   quantity: Number,
+  cartQuantity: Number,
 });
 
 module.exports = {
